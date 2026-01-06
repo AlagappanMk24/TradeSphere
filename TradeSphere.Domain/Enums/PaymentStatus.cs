@@ -1,0 +1,10 @@
+﻿namespace TradeSphere.Domain.Enums
+{
+    public enum PaymentStatus
+    {
+        Pending,
+        Completed,
+        Failed,
+        Cancelled
+    }
+}

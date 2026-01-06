@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/TradeSphere.API/bin/Debug/net8.0
+/TradeSphere.API/obj
+/TradeSphere.Application/bin/Debug/net8.0
+/TradeSphere.Application/obj
+/TradeSphere.Domain/bin/Debug/net8.0
+/TradeSphere.Domain/obj
+/TradeSphere.Infrastructure/bin/Debug/net8.0
+/TradeSphere.Infrastructure/obj
