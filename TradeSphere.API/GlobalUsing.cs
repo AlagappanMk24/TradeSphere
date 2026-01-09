@@ -1,1 +1,25 @@
-﻿
+﻿global using Microsoft.EntityFrameworkCore;
+global using TradeSphere.Infrastructure.Data.DbContext;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Authorization;
+global using System.Security.Claims;
+global using TradeSphere.API.Errors;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.IdentityModel.Tokens;
+global using Microsoft.OpenApi.Models;
+global using System.Text;
+global using TradeSphere.Infrastructure.Data.DataSeed;
+global using TradeSphere.Api.Extensions;
+global using TradeSphere.API.Extensions;
+global using TradeSphere.API.Middlewares;
+global using TradeSphere.Application.CrossCuttingConcerns.Logging;
+global using Microsoft.AspNetCore.Identity;
+global using TradeSphere.Application.Contracts.Interfaces.Repositories;
+global using TradeSphere.Application.Contracts.Interfaces.Services;
+global using TradeSphere.Application.Contracts.Interfaces.UnitOfWork;
+global using TradeSphere.Application.UseCases;
+global using TradeSphere.Application.UseCases.Interfaces;
+global using TradeSphere.Domain.Entities.Identity;
+global using TradeSphere.Infrastructure.Repositories.AuthRepository;
+global using TradeSphere.Infrastructure.Services;
+global using TradeSphere.Infrastructure.UnitOfWork;

@@ -1,24 +1,25 @@
-using KS_Sweets.Application.CrossCuttingConcerns.Logging;
-using Microsoft.EntityFrameworkCore;
-using TradeSphere.Infrastructure.Data.DbContext;
-
 // =========================================================
-// 1. WEB APPLICATION BUILDER
+// WEB APPLICATION BUILDER
 // =========================================================
+using Microsoft.Extensions.Options;
+using TradeSphere.Application.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configure services for dependency injection
+// 1. Service Configuration
 ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
+
+// 2. Database Initialization
+await app.ApplyMigrationWithSeed();
 
 // =========================================================
 // 2. MIDDLEWARE CONFIGURATION
 // =========================================================
 ConfigureMiddleware(app);
 
- app.Run();
+app.Run();
 
 // =========================================================
 // 3. SERVICE CONFIGURATION (ADD SERVICES)
@@ -29,6 +30,20 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 
     // Configure Database Context
     ConfigureDatabase(services, configuration);
+
+    // Web API Core Services
+    services.AddControllers();
+    services.AddEndpointsApiExplorer();
+    services.AddSwaggerGen();
+    services.AddHttpContextAccessor();
+
+    // Custom Extension Methods
+    services.ApplyServices(builder.Configuration);
+    services.AddAuthorizeSwaggerAsync(builder.Configuration);
+    services.ValidationResponse();
+
+    services.Configure<FileLoggingSettings>(configuration.GetSection(FileLoggingSettings.SectionName));
+    services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
 }
 
 // ====================== Database Connection ======================
@@ -57,6 +72,7 @@ void ConfigureMiddleware(WebApplication app)
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+    app.UseMiddleware<GlobalErrorMiddleware>();
 
     // Redirect HTTP to HTTPS
     app.UseHttpsRedirection();
@@ -77,10 +93,12 @@ void ConfigureMiddleware(WebApplication app)
 }
 void ConfigureCustomLogging(WebApplication app)
 {
-    // Get Configuration from app.Configuration
-    string formattedDate = DateTime.Now.ToString("MM-dd-yyyy");
-    string baseLogPath = app.Configuration.GetValue<string>("Logging:LogFilePath") ?? "Logs";
-    string logFilePath = Path.Combine(baseLogPath, $"log-{formattedDate}.txt");
+    using var scope = app.Services.CreateScope();
+
+    // Get the settings using IOptions
+    var settings = scope.ServiceProvider.GetRequiredService<IOptions<FileLoggingSettings>>().Value;
+
+    string logFilePath = Path.Combine(settings.LogFilePath, $"log-{DateTime.Now:MM-dd-yyyy}.txt");
 
     // Get required services from the application service provider
     var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();

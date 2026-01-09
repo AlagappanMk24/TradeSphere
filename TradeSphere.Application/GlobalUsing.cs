@@ -1,1 +1,10 @@
-﻿
+﻿global using Microsoft.EntityFrameworkCore.Storage;
+global using TradeSphere.Application.Contracts.Interfaces.Repositories;
+global using TradeSphere.Domain.Entities.Common;
+global using TradeSphere.Domain.Entities.Identity;
+global using TradeSphere.Application.Contracts.DTOs.AuthDto;
+global using System.Linq.Expressions;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.Extensions.Logging;
+global using TradeSphere.Application.Contracts.Interfaces.Services;
+global using TradeSphere.Application.UseCases.Interfaces;

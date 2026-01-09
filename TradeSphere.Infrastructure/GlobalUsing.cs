@@ -3,3 +3,7 @@ global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using TradeSphere.Domain.Entities;
 global using TradeSphere.Domain.Enums;
 global using TradeSphere.Domain.Entities.Identity;
+global using Microsoft.AspNetCore.Identity;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using TradeSphere.Infrastructure.Data.DbContext;

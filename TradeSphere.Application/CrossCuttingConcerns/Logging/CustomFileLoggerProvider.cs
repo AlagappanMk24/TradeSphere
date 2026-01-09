@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using TradeSphere.Application.CrossCuttingConcerns.Logging;
-
-namespace KS_Sweets.Application.CrossCuttingConcerns.Logging
+﻿namespace TradeSphere.Application.CrossCuttingConcerns.Logging
 {
     public class CustomFileLoggerProvider : ILoggerProvider
     {
