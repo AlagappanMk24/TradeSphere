@@ -10,3 +10,5 @@ global using TradeSphere.Application.Contracts.Interfaces.Services;
 global using TradeSphere.Application.UseCases.Interfaces;
 global using AutoMapper;
 global using TradeSphere.Application.Contracts.DTOs.RolesDto;
+global using TradeSphere.Application.Contracts.DTOs.CategoryDto;
+global using TradeSphere.Domain.Entities;

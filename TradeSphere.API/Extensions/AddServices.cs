@@ -1,5 +1,8 @@
 ﻿using TradeSphere.Application.Mappings.AccountMapping;
+using TradeSphere.Application.Mappings.CategoryMapping;
 using TradeSphere.Application.Mappings.RoleMapping;
+using TradeSphere.Application.UseCases;
+using TradeSphere.Infrastructure.Repositories.CategoryRepository;
 using TradeSphere.Infrastructure.Repositories.RoleRepository;
 
 namespace TradeSphere.Api.Extensions
@@ -22,14 +25,17 @@ namespace TradeSphere.Api.Extensions
 
             service.AddAutoMapper(cfg => { }, typeof(AccountProfile).Assembly);
             service.AddAutoMapper(cfg => { }, typeof(RoleProfile).Assembly);
+            service.AddAutoMapper(cfg => { }, typeof(CategoryProfile).Assembly);
 
             service.AddScoped<IAuthUseCase, AuthUseCase>();
             service.AddScoped<IAccountUseCase, AccountUseCase>();
             service.AddScoped<IRoleUseCase, RoleUseCase>();
+            service.AddScoped<ICategoryUseCase, CategoryUseCase>();
             service.AddScoped<IAuthService, AuthService>();
             service.AddScoped<IAuthRepository, AuthRepository>();
             service.AddScoped<IAccountRepository, AccountRepository>();
             service.AddScoped<IRoleRepository, RoleRepository>();
+            service.AddScoped<ICategoryRepository, CategoryRepository>();
             service.AddScoped<IEmailService, EmailService>();
             service.AddScoped<IUnitOfWork, UnitOfWork>();
             service.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();

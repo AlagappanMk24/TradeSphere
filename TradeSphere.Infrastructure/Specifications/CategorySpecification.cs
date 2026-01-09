@@ -1,0 +1,22 @@
+﻿namespace TradeSphere.Infrastructure.Specifications
+{
+    public class CategorySpecification : BaseSpecification<Category>
+    {
+        public CategorySpecification()
+        {
+            AddInculdes();
+        }
+        public CategorySpecification(int id) : base(r => r.Id == id)
+        {
+            AddInculdes();
+        }
+        public CategorySpecification(Expression<Func<Category, bool>> criteria) : base(criteria)
+        {
+            AddInculdes();
+        }
+        void AddInculdes()
+        {
+            Includes.Add(c => c.Products);
+        }
+    }
+}

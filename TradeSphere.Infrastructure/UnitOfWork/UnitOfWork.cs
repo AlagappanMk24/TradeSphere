@@ -1,13 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Storage;
-using TradeSphere.Application.Contracts.Interfaces.Repositories;
-using TradeSphere.Application.Contracts.Interfaces.UnitOfWork;
-using TradeSphere.Domain.Entities.Common;
-using TradeSphere.Infrastructure.Data.DbContext;
-using TradeSphere.Infrastructure.Repositories;
-using TradeSphere.Infrastructure.Repositories.AuthRepository;
-
-namespace TradeSphere.Infrastructure.UnitOfWork
+﻿namespace TradeSphere.Infrastructure.UnitOfWork
 {
     public class UnitOfWork(TradeSphereDbContext context, UserManager<ApplicationUser> userManger, IAuthRepository user) : IUnitOfWork
     {
