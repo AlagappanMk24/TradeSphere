@@ -1,0 +1,12 @@
+﻿namespace TradeSphere.Application.Contracts.Interfaces.Repositories
+{
+    public interface IShoppingCartRepository
+    {
+        Task<ShoppingCart> GetShoppingCartByUser(int userId);
+        Task<ShoppingCart> GetById(int id);
+        Task<ShoppingCart> AddShoppingCart(ShoppingCart shoppingCart);
+        Task<ShoppingCart> UpdateShoppingCart(ShoppingCart shoppingCart);
+        Task<bool> DeleteShoppingCart(ShoppingCart shoppingCart);
+        public Task<ShoppingCart> GetByIdTracked(int id);
+    }
+}

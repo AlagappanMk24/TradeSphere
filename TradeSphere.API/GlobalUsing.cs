@@ -33,3 +33,4 @@ global using TradeSphere.Application.Mappings.RoleMapping;
 global using TradeSphere.Infrastructure.Repositories.CategoryRepository;
 global using TradeSphere.Infrastructure.Repositories.ProductRepository;
 global using TradeSphere.Infrastructure.Repositories.RoleRepository;
+global using TradeSphere.Infrastructure.Repositories.ShoppingCartRepository;
