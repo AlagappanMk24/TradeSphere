@@ -1,10 +1,14 @@
 ﻿
+using TradeSphere.Application.Settings;
+
 namespace TradeSphere.API.Extensions
 {
     public static class AddAuthorizeSwagger
     {
         public static IServiceCollection AddAuthorizeSwaggerAsync(this IServiceCollection service, IConfiguration configuration)
         {
+            var jwtSettings = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>();
+
             service.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -18,11 +22,11 @@ namespace TradeSphere.API.Extensions
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     ClockSkew = TimeSpan.Zero,
-                    ValidIssuer = configuration["JwtOptions:issuer"],
-                    ValidAudience = configuration["JwtOptions:audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("secretKey") ?? configuration["JwtOptions:secretKey"]!))
+                    ValidIssuer = jwtSettings?.Issuer,
+                    ValidAudience = jwtSettings?.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                      Encoding.UTF8.GetBytes(jwtSettings?.Key ?? throw new InvalidOperationException("JWT Key is missing!")))
                 };
-
             });
 
 

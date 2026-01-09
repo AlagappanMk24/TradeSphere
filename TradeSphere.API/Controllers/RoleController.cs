@@ -5,10 +5,12 @@
     // [Authorize("Admin")]
     public class RoleController(RoleUseCase roleUseCase) : ControllerBase
     {
+        private readonly IRoleUseCase _roleUseCase = roleUseCase;
+
         [HttpGet]
         public async Task<ActionResult<RoleDto>> GetAllRoles()
         {
-            var roles = await roleUseCase.GetAllRoles();
+            var roles = await _roleUseCase.GetAllRoles();
             if (roles is null) return NotFound("No roles found.");
             return Ok(roles);
         }
@@ -16,7 +18,7 @@
         [HttpGet("{id}")]
         public async Task<ActionResult<RoleDto>> GetRoleById(int id)
         {
-            var role = await roleUseCase.GetRoleById(id);
+            var role = await _roleUseCase.GetRoleById(id);
             if (role is null) return NotFound($"Role with ID {id} not found.");
             return Ok(role);
         }
@@ -24,7 +26,7 @@
         [HttpGet("userId")]
         public async Task<ActionResult<RoleDto>> GetUserRole(int userId)
         {
-            var role = await roleUseCase.GetUserRole(userId);
+            var role = await _roleUseCase.GetUserRole(userId);
             if (role is null) return NotFound($"Role for User ID {userId} not found.");
             return Ok(role);
         }
@@ -32,7 +34,7 @@
         [HttpPut]
         public async Task<ActionResult> UpdateRole(int roleId, string name)
         {
-            var result = await roleUseCase.UpdateRole(roleId, name);
+            var result = await _roleUseCase.UpdateRole(roleId, name);
             if (!result) return NotFound($"Role with ID {roleId} not found.");
             return NoContent();
         }
@@ -40,7 +42,7 @@
         [HttpPost]
         public async Task<ActionResult> AddRole(string roleName)
         {
-            var result = await roleUseCase.AddRole(roleName);
+            var result = await _roleUseCase.AddRole(roleName);
             if (result == "Role name cannot be empty")
                 return BadRequest(new ApiResponse(400, result));
             return Ok(new ApiResponse(200, result));
@@ -49,7 +51,7 @@
         [HttpPost("ChangeUserRole")]
         public async Task<ActionResult> ChangeUserRole(int userId, string roleName)
         {
-            var result = await roleUseCase.ChangeUserRole(userId, roleName);
+            var result = await _roleUseCase.ChangeUserRole(userId, roleName);
             if (!result) return NotFound($"Failed to change role for User ID {userId}.");
             return NoContent();
         }

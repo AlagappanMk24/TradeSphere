@@ -2,13 +2,15 @@
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CategoryController(CategoryUseCase categoryUseCase, ILogger<CategoryController> logger) : ControllerBase
+    public class CategoryController(ICategoryUseCase categoryUseCase, ILogger<CategoryController> logger) : ControllerBase
     {
+        private readonly ICategoryUseCase _categoryUseCase = categoryUseCase;
+        private readonly ILogger<CategoryController> _logger = logger;
         [HttpGet("GetAllCategory")]
         public async Task<ActionResult<List<CategoryListDto>>> GetAll()
         {
-            var categories = await categoryUseCase.GetAllCategory();
-            if (categories == null || !categories.Any())
+            var categories = await _categoryUseCase.GetAllCategory();
+            if (categories == null || categories.Count == 0)
                 return NotFound(new ApiResponse(404, "No categories found"));
             return Ok(categories);
         }
@@ -16,7 +18,7 @@
         [HttpGet("GetById/{id}")]
         public async Task<ActionResult<CategoryListDto>> GetById(int id)
         {
-            var data = await categoryUseCase.GetById(id);
+            var data = await _categoryUseCase.GetById(id);
             if (data == null) return NotFound(new ApiResponse(404));
             return Ok(data);
         }
@@ -26,7 +28,7 @@
         {
             try
             {
-                var category = await categoryUseCase.GetByName(name);
+                var category = await _categoryUseCase.GetByName(name);
                 if (category == null)
                     return NotFound(new ApiResponse(404, $"Category with name {name} not found"));
 
@@ -34,7 +36,7 @@
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Unhandled exception in GetByName controller");
+                _logger.LogError(ex, "Unhandled exception in GetByName controller");
                 return StatusCode(500, new ApiResponse(500, "Internal server error"));
             }
         }
@@ -44,7 +46,7 @@
         {
             try
             {
-                var deleted = await categoryUseCase.DeleteCategory(id);
+                var deleted = await _categoryUseCase.DeleteCategory(id);
                 if (!deleted)
                     return NotFound(new ApiResponse(404, $"Category with Id {id} not found"));
 
@@ -52,7 +54,7 @@
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Unhandled exception in DeleteCategory controller");
+                _logger.LogError(ex, "Unhandled exception in DeleteCategory controller");
                 return StatusCode(500, new ApiResponse(500, "Internal server error"));
             }
         }
@@ -63,14 +65,14 @@
         {
             try
             {
-                var addCategory = await categoryUseCase.AddCategory(categoryAddDto);
+                var addCategory = await _categoryUseCase.AddCategory(categoryAddDto);
                 if (addCategory == null)
                     return BadRequest(new ApiResponse(statusCode: 400, $"Cant Add Category With name {categoryAddDto.Name}"));
                 return Ok(addCategory);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Unhandled exception in AddCategory controller");
+                _logger.LogError(ex, "Unhandled exception in AddCategory controller");
                 return StatusCode(500, new ApiResponse(500, "Internal server error"));
             }
         }
@@ -84,7 +86,7 @@
 
             try
             {
-                var updateCategory = await categoryUseCase.UpdateCategory(id, categoryAddDto);
+                var updateCategory = await _categoryUseCase.UpdateCategory(id, categoryAddDto);
                 if (updateCategory == null)
                     return BadRequest(new ApiResponse(400, $"Data In Valid"));
 
@@ -92,7 +94,7 @@
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Unhandled exception in UpdateCategory controller");
+                _logger.LogError(ex, "Unhandled exception in UpdateCategory controller");
                 return StatusCode(500, new ApiResponse(500, "Internal server error"));
             }
         }

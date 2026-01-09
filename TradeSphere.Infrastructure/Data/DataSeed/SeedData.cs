@@ -76,6 +76,25 @@
                     context.UserRoles.AddRange(userRoles);
                     await context.SaveChangesAsync();
                 }
+
+                //Add Category
+                if (!context.Categories.Any())
+                {
+                    var categoryData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "Categories.json"));
+                    var categories = JsonSerializer.Deserialize<List<Category>>(categoryData, option)!;
+                    context.Categories.AddRange(categories);
+                    await context.SaveChangesAsync();
+                }
+
+                //Add Product
+                if (!context.Products.Any())
+                {
+                    var productData = await File.ReadAllTextAsync(Path.Combine(seedFilesPath, "Products.json"));
+                    var products = JsonSerializer.Deserialize<List<Product>>(productData, option)!;
+                    context.Products.AddRange(products);
+                    await context.SaveChangesAsync();
+                }
+
                 await transaction.CommitAsync();
             }
             catch (Exception)
