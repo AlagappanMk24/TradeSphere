@@ -7,3 +7,4 @@ global using Microsoft.AspNetCore.Identity;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
 global using TradeSphere.Infrastructure.Data.DbContext;
+global using TradeSphere.Application.Contracts.Interfaces.Repositories;

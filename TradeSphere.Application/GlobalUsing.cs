@@ -8,3 +8,5 @@ global using Microsoft.AspNetCore.Http;
 global using Microsoft.Extensions.Logging;
 global using TradeSphere.Application.Contracts.Interfaces.Services;
 global using TradeSphere.Application.UseCases.Interfaces;
+global using AutoMapper;
+global using TradeSphere.Application.Contracts.DTOs.RolesDto;

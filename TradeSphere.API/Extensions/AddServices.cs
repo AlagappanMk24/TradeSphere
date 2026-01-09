@@ -1,4 +1,8 @@
-﻿namespace TradeSphere.Api.Extensions
+﻿using TradeSphere.Application.Mappings.AccountMapping;
+using TradeSphere.Application.Mappings.RoleMapping;
+using TradeSphere.Infrastructure.Repositories.RoleRepository;
+
+namespace TradeSphere.Api.Extensions
 {
     public static class AddServices
     {
@@ -16,10 +20,16 @@
 
             }).AddEntityFrameworkStores<TradeSphereDbContext>().AddDefaultTokenProviders();
 
+            service.AddAutoMapper(cfg => { }, typeof(AccountProfile).Assembly);
+            service.AddAutoMapper(cfg => { }, typeof(RoleProfile).Assembly);
+
             service.AddScoped<IAuthUseCase, AuthUseCase>();
+            service.AddScoped<IAccountUseCase, AccountUseCase>();
+            service.AddScoped<IRoleUseCase, RoleUseCase>();
             service.AddScoped<IAuthService, AuthService>();
             service.AddScoped<IAuthRepository, AuthRepository>();
             service.AddScoped<IAccountRepository, AccountRepository>();
+            service.AddScoped<IRoleRepository, RoleRepository>();
             service.AddScoped<IEmailService, EmailService>();
             service.AddScoped<IUnitOfWork, UnitOfWork>();
             service.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();

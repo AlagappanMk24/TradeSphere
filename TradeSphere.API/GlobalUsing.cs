@@ -23,3 +23,4 @@ global using TradeSphere.Domain.Entities.Identity;
 global using TradeSphere.Infrastructure.Repositories.AuthRepository;
 global using TradeSphere.Infrastructure.Services;
 global using TradeSphere.Infrastructure.UnitOfWork;
+global using TradeSphere.Application.Contracts.DTOs.RolesDto;
