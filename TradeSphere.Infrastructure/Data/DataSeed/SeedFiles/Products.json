@@ -5,7 +5,7 @@
     "Price": 25000.00,
     "Quantity": 50,
     "Image": "samsung-s23.jpg",
-    "CategoryId": 1
+    "CategoryName": "Electronics"
   },
   {
     "Name": "iPhone 15 Pro",
@@ -13,7 +13,7 @@
     "Price": 35000.00,
     "Quantity": 30,
     "Image": "iphone-15-pro.jpg",
-    "CategoryId": 1
+    "CategoryName": "Electronics"
   },
   {
     "Name": "Dell XPS 15",
@@ -21,7 +21,7 @@
     "Price": 45000.00,
     "Quantity": 20,
     "Image": "dell-xps-15.jpg",
-    "CategoryId": 1
+    "CategoryName": "Electronics"
   },
   {
     "Name": "Men's T-Shirt",
@@ -29,7 +29,7 @@
     "Price": 250.00,
     "Quantity": 100,
     "Image": "tshirt.jpg",
-    "CategoryId": 2
+    "CategoryName": "Clothing"
   },
   {
     "Name": "Women's Dress",
@@ -37,7 +37,7 @@
     "Price": 800.00,
     "Quantity": 75,
     "Image": "dress.jpg",
-    "CategoryId": 2
+    "CategoryName": "Clothing"
   },
   {
     "Name": "Jeans",
@@ -45,7 +45,7 @@
     "Price": 600.00,
     "Quantity": 60,
     "Image": "jeans.jpg",
-    "CategoryId": 2
+    "CategoryName": "Clothing"
   },
   {
     "Name": "Harry Potter Collection",
@@ -53,7 +53,7 @@
     "Price": 1500.00,
     "Quantity": 40,
     "Image": "harry-potter.jpg",
-    "CategoryId": 3
+    "CategoryName": "Books"
   },
   {
     "Name": "Programming in C#",
@@ -61,7 +61,7 @@
     "Price": 450.00,
     "Quantity": 35,
     "Image": "csharp-book.jpg",
-    "CategoryId": 3
+    "CategoryName": "Books"
   },
   {
     "Name": "Coffee Maker",
@@ -69,7 +69,7 @@
     "Price": 1200.00,
     "Quantity": 45,
     "Image": "coffee-maker.jpg",
-    "CategoryId": 4
+    "CategoryName": "Home & Kitchen"
   },
   {
     "Name": "Kitchen Knife Set",
@@ -77,7 +77,7 @@
     "Price": 850.00,
     "Quantity": 55,
     "Image": "knife-set.jpg",
-    "CategoryId": 4
+    "CategoryName": "Home & Kitchen"
   },
   {
     "Name": "Football",
@@ -85,7 +85,7 @@
     "Price": 350.00,
     "Quantity": 80,
     "Image": "football.jpg",
-    "CategoryId": 5
+    "CategoryName": "Sports"
   },
   {
     "Name": "Running Shoes",
@@ -93,7 +93,7 @@
     "Price": 1200.00,
     "Quantity": 65,
     "Image": "running-shoes.jpg",
-    "CategoryId": 5
+    "CategoryName": "Sports"
   },
   {
     "Name": "LEGO City Set",
@@ -101,7 +101,7 @@
     "Price": 2000.00,
     "Quantity": 30,
     "Image": "lego-city.jpg",
-    "CategoryId": 6
+    "CategoryName": "Toys"
   },
   {
     "Name": "Barbie Doll",
@@ -109,6 +109,6 @@
     "Price": 400.00,
     "Quantity": 70,
     "Image": "barbie.jpg",
-    "CategoryId": 6
+    "CategoryName": "Toys"
   }
 ]

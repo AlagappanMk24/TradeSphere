@@ -1,12 +1,13 @@
 ﻿namespace TradeSphere.API.Controllers
 {
     [ApiController]
-    [Route("Api/[controller]")]
+    [Route("api/products")]
     public class ProductController(IProductUseCase productUseCase, ILogger<ProductController> logger) : ControllerBase
     {
         private readonly IProductUseCase _productUseCase = productUseCase;
         private readonly ILogger<ProductController> _logger = logger;
 
+        // GET: api/products
         [HttpGet]
         public async Task<ActionResult<List<ProductInfoDto>>> GetAllProduct()
         {
@@ -15,7 +16,8 @@
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        // GET: api/products/5
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<ProductInfoDto>> GetProductById(int id)
         {
             if (id <= 0) return BadRequest(new ApiResponse(400, "InvalidId"));
@@ -24,8 +26,10 @@
             return Ok(product);
         }
 
-        [HttpGet("GetByName{name}")]
-        public async Task<ActionResult<ProductInfoDto>> GetByName(string name)
+        // GET: api/products/search?name=phone
+        // Industry standard uses query parameters for filtering/searching
+        [HttpGet("search")]
+        public async Task<ActionResult<ProductInfoDto>> GetByName([FromQuery] string name)
         {
             if (string.IsNullOrWhiteSpace(name)) return BadRequest(new ApiResponse(400, "Invalid Name"));
             var product = await _productUseCase.GetProductByName(name);
@@ -34,6 +38,7 @@
 
         }
 
+        // POST: api/products
         [HttpPost]
         public async Task<ActionResult<ProductInfoDto>> AddProduct(ProductAddDto productAdd)
         {
@@ -52,7 +57,8 @@
             return Ok(addProduct);
         }
 
-        [HttpPut("{id}")]
+        // PUT: api/products/5
+        [HttpPut("{id:int}")]
         public async Task<ActionResult<ProductInfoDto>> UpdateProduct(int id, ProductAddDto updateProduct)
         {
             if (id <= 0 || updateProduct is null)
@@ -63,7 +69,8 @@
             return Ok(product);
         }
 
-        [HttpDelete("{id}")]
+        // DELETE: api/products/5
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             if (id <= 0)

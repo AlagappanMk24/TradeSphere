@@ -1,12 +1,13 @@
 ﻿namespace TradeSphere.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/categories")]
     public class CategoryController(ICategoryUseCase categoryUseCase, ILogger<CategoryController> logger) : ControllerBase
     {
         private readonly ICategoryUseCase _categoryUseCase = categoryUseCase;
         private readonly ILogger<CategoryController> _logger = logger;
-        [HttpGet("GetAllCategory")]
+
+        [HttpGet]
         public async Task<ActionResult<List<CategoryListDto>>> GetAll()
         {
             var categories = await _categoryUseCase.GetAllCategory();
@@ -15,7 +16,7 @@
             return Ok(categories);
         }
 
-        [HttpGet("GetById/{id}")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<CategoryListDto>> GetById(int id)
         {
             var data = await _categoryUseCase.GetById(id);
@@ -23,7 +24,7 @@
             return Ok(data);
         }
 
-        [HttpGet("GetByName/{name}")]
+        [HttpGet("name/{name}")]
         public async Task<ActionResult<CategoryListDto>> GetByName(string name)
         {
             try
@@ -41,25 +42,7 @@
             }
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
-        {
-            try
-            {
-                var deleted = await _categoryUseCase.DeleteCategory(id);
-                if (!deleted)
-                    return NotFound(new ApiResponse(404, $"Category with Id {id} not found"));
-
-                return Ok(new ApiResponse(204, "Deleted Successfully"));
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Unhandled exception in DeleteCategory controller");
-                return StatusCode(500, new ApiResponse(500, "Internal server error"));
-            }
-        }
-
-        //Add && Update
+        //Add 
         [HttpPost]
         public async Task<ActionResult<CategoryListDto>> AddCategory(CategoryAddDto categoryAddDto)
         {
@@ -78,7 +61,7 @@
         }
 
         //Update
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<ActionResult<CategoryListDto>> UpdateCategory(int id, CategoryAddDto categoryAddDto)
         {
             if (categoryAddDto == null)
@@ -95,6 +78,24 @@
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Unhandled exception in UpdateCategory controller");
+                return StatusCode(500, new ApiResponse(500, "Internal server error"));
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            try
+            {
+                var deleted = await _categoryUseCase.DeleteCategory(id);
+                if (!deleted)
+                    return NotFound(new ApiResponse(404, $"Category with Id {id} not found"));
+
+                return Ok(new ApiResponse(204, "Deleted Successfully"));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unhandled exception in DeleteCategory controller");
                 return StatusCode(500, new ApiResponse(500, "Internal server error"));
             }
         }

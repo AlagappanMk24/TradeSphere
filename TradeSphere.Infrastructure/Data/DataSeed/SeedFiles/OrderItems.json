@@ -1,0 +1,26 @@
+[
+  {
+    "UserEmail": "user1@tradesphere.com",
+    "ProductName": "Samsung Galaxy S23",
+    "Quantity": 1,
+    "UnitPrice": 25000.00
+  },
+  {
+    "UserEmail": "user1@tradesphere.com",
+    "ProductName": "Jeans",
+    "Quantity": 2,
+    "UnitPrice": 600.00
+  },
+  {
+    "UserEmail": "user2@tradesphere.com",
+    "ProductName": "LEGO City Set",
+    "Quantity": 1,
+    "UnitPrice": 2000.00
+  },
+  {
+    "UserEmail": "user1@tradesphere.com",
+    "ProductName": "Dell XPS 15",
+    "Quantity": 1,
+    "UnitPrice": 45000.00
+  }
+]

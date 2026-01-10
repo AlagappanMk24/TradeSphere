@@ -34,3 +34,6 @@ global using TradeSphere.Infrastructure.Repositories.CategoryRepository;
 global using TradeSphere.Infrastructure.Repositories.ProductRepository;
 global using TradeSphere.Infrastructure.Repositories.RoleRepository;
 global using TradeSphere.Infrastructure.Repositories.ShoppingCartRepository;
+global using TradeSphere.Application.DTOs.OrderDto;
+global using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
+global using TradeSphere.Application.Contracts.DTOs.AuthDto;

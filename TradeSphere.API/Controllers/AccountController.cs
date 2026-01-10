@@ -1,14 +1,12 @@
-﻿using TradeSphere.Application.Contracts.DTOs.AuthDto;
-
-namespace TradeSphere.API.Controllers
+﻿namespace TradeSphere.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/account")]
     public class AccountController(IAccountUseCase accountUseCase) : ControllerBase
     {
         private readonly IAccountUseCase _accountUseCase = accountUseCase;
 
-        [HttpGet("GetProfile")]
+        [HttpGet("profile")]
         [Authorize]
         public async Task<ActionResult<UserProfileDto>> GetProfile()
         {
@@ -22,7 +20,7 @@ namespace TradeSphere.API.Controllers
             return Ok(result);
         }
 
-        [HttpPut("updateProfile")]
+        [HttpPut("profile")]
         [Authorize]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileDto updateProfile)
         {
@@ -35,7 +33,7 @@ namespace TradeSphere.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("changePassword")]
+        [HttpPost("password/change")]
         public async Task<IActionResult> ChangePassword(string currentPassword, string newPassword)
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);
@@ -49,7 +47,7 @@ namespace TradeSphere.API.Controllers
             return Ok(new ApiResponse(200, result));
         }
 
-        [HttpPost("changeEmail")]
+        [HttpPost("email/change-request")]
         public async Task<IActionResult> ChangeEmail(string newEmail)
         {
             var userEmail = User.FindFirstValue(ClaimTypes.Email);

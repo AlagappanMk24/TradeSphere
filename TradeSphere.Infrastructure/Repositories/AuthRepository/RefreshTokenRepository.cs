@@ -14,7 +14,7 @@ namespace TradeSphere.Infrastructure.Repositories.AuthRepository
         public async Task<RefreshToken?> GetActiveTokenByUserIdAsync(int userId)
         {
             var spec = new RefreshTokenSpecification(r =>
-                r.AppUserId == userId &&
+                r.ApplicationUserId == userId &&
                 r.RevokedOn == null &&
                 r.ExpireOn > DateTime.UtcNow);
             return await unitOfWork.Repository<RefreshToken>().GetByIdSpec(spec);
@@ -33,7 +33,7 @@ namespace TradeSphere.Infrastructure.Repositories.AuthRepository
         public async Task RevokeAllByUserIdAsync(int userId)
         {
             var spec = new RefreshTokenSpecification(r =>
-                r.AppUserId == userId &&
+                r.ApplicationUserId == userId &&
                 r.RevokedOn == null);
 
             var tokens = await unitOfWork.Repository<RefreshToken>().GetAllWithSpec(spec);

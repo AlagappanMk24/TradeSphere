@@ -33,7 +33,7 @@ namespace TradeSphere.Infrastructure.Repositories.AuthRepository
             var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
             var encodedToken = WebUtility.UrlEncode(token);
             var confirmUrl =
-              $"{configuration["EmailSettings:AppUrl"]}/api/Account/confirmEmail" +
+              $"{configuration["EmailSettings:AppUrl"]}/api/auth/confirmEmail" +
               $"?userId={user.Id}&token={encodedToken}";
             await emailService.SendEmailAsync(user.Email, "Confirm your email", EmailBody(confirmUrl));
             return user;

@@ -1,8 +1,8 @@
 [
   {
-    "AppUserId": 2
+    "UserEmail": "user1@tradesphere.com"
   },
   {
-    "AppUserId": 4
+    "UserEmail": "user2@tradesphere.com"
   }
 ]

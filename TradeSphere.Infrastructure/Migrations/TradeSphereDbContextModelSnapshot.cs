@@ -380,7 +380,7 @@ namespace TradeSphere.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AppUserId")
+                    b.Property<int>("ApplicationUserId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -417,7 +417,7 @@ namespace TradeSphere.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("RefreshTokens", (string)null);
                 });
@@ -742,13 +742,13 @@ namespace TradeSphere.Infrastructure.Migrations
 
             modelBuilder.Entity("TradeSphere.Domain.Entities.Identity.RefreshToken", b =>
                 {
-                    b.HasOne("TradeSphere.Domain.Entities.Identity.ApplicationUser", "AppUser")
+                    b.HasOne("TradeSphere.Domain.Entities.Identity.ApplicationUser", "ApplicationUser")
                         .WithMany("RefreshTokens")
-                        .HasForeignKey("AppUserId")
+                        .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("TradeSphere.Domain.Entities.Order", b =>

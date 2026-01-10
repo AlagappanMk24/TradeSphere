@@ -1,0 +1,17 @@
+[
+  {
+    "Quantity": 1,
+    "UserEmail": "user1@tradesphere.com",
+    "ProductName": "Samsung Galaxy S23"
+  },
+  {
+    "Quantity": 2,
+    "UserEmail": "user1@tradesphere.com",
+    "ProductName": "Men's T-Shirt"
+  },
+  {
+    "Quantity": 1,
+    "UserEmail": "user2@tradesphere.com",
+    "ProductName": "Harry Potter Collection"
+  }
+]

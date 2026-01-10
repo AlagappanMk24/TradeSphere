@@ -1,5 +1,4 @@
-﻿
-using TradeSphere.Application.Settings;
+﻿using TradeSphere.Application.Settings;
 
 namespace TradeSphere.API.Extensions
 {
@@ -28,8 +27,6 @@ namespace TradeSphere.API.Extensions
                       Encoding.UTF8.GetBytes(jwtSettings?.Key ?? throw new InvalidOperationException("JWT Key is missing!")))
                 };
             });
-
-
             service.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo

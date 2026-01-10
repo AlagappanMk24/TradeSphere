@@ -1,4 +1,6 @@
-﻿namespace TradeSphere.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace TradeSphere.Domain.Entities
 {
     public class Product : BaseEntity
     {
@@ -8,6 +10,9 @@
         public int Quantity { get; set; }
         public string Image { get; set; }
         public int CategoryId { get; set; }
+
+        [NotMapped]
+        public string CategoryName { get; set; }
 
         // Navigation properties
         public Category Category { get; set; }

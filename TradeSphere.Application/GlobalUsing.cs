@@ -13,3 +13,8 @@ global using TradeSphere.Application.Contracts.DTOs.RolesDto;
 global using TradeSphere.Application.Contracts.DTOs.CategoryDto;
 global using TradeSphere.Domain.Entities;
 global using TradeSphere.Application.Contracts.DTOs.ProductDto;
+global using TradeSphere.Application.DTOs.OrderDto;
+global using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
+global using TradeSphere.Application.DTOs.OrderItemDto;
+global using TradeSphere.Domain.Enums;
+global using TradeSphere.Application.Contracts.DTOs.PaymentDto;

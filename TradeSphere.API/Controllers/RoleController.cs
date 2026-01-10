@@ -1,13 +1,13 @@
 ﻿namespace TradeSphere.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/roles")]
     // [Authorize("Admin")]
     public class RoleController(RoleUseCase roleUseCase) : ControllerBase
     {
         private readonly IRoleUseCase _roleUseCase = roleUseCase;
 
-        [HttpGet]
+        [HttpGet] // GET api/roles
         public async Task<ActionResult<RoleDto>> GetAllRoles()
         {
             var roles = await _roleUseCase.GetAllRoles();
@@ -15,7 +15,7 @@
             return Ok(roles);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")] // GET api/roles/5
         public async Task<ActionResult<RoleDto>> GetRoleById(int id)
         {
             var role = await _roleUseCase.GetRoleById(id);
@@ -23,7 +23,8 @@
             return Ok(role);
         }
 
-        [HttpGet("userId")]
+        // Standard for relationship: resources/id/sub-resource
+        [HttpGet("users/{userId}")] // GET api/roles/users/1
         public async Task<ActionResult<RoleDto>> GetUserRole(int userId)
         {
             var role = await _roleUseCase.GetUserRole(userId);
@@ -31,16 +32,16 @@
             return Ok(role);
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateRole(int roleId, string name)
+        [HttpPut("{roleId:int}")] // PUT api/roles/5
+        public async Task<ActionResult> UpdateRole(int roleId, [FromBody] string name)
         {
             var result = await _roleUseCase.UpdateRole(roleId, name);
             if (!result) return NotFound($"Role with ID {roleId} not found.");
             return NoContent();
         }
 
-        [HttpPost]
-        public async Task<ActionResult> AddRole(string roleName)
+        [HttpPost] // POST api/roles
+        public async Task<ActionResult> AddRole([FromBody] string roleName)
         {
             var result = await _roleUseCase.AddRole(roleName);
             if (result == "Role name cannot be empty")
@@ -48,11 +49,11 @@
             return Ok(new ApiResponse(200, result));
         }
 
-        [HttpPost("ChangeUserRole")]
-        public async Task<ActionResult> ChangeUserRole(int userId, string roleName)
+        [HttpPost("assignments")] // POST api/roles/assignments
+        public async Task<ActionResult> ChangeUserRole([FromBody] UserRoleChangeDto dto)
         {
-            var result = await _roleUseCase.ChangeUserRole(userId, roleName);
-            if (!result) return NotFound($"Failed to change role for User ID {userId}.");
+            var result = await _roleUseCase.ChangeUserRole(dto.UserId, dto.RoleName);
+            if (!result) return NotFound($"Failed to change role for User ID {dto.UserId}.");
             return NoContent();
         }
     }

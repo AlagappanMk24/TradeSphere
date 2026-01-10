@@ -220,7 +220,7 @@ namespace TradeSphere.Infrastructure.Migrations
                     ExpireOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime", nullable: false),
                     RevokedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    AppUserId = table.Column<int>(type: "int", nullable: false),
+                    ApplicationUserId = table.Column<int>(type: "int", nullable: false),
                     RememberMe = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -232,8 +232,8 @@ namespace TradeSphere.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_RefreshTokens", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RefreshTokens_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
+                        name: "FK_RefreshTokens_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -516,9 +516,9 @@ namespace TradeSphere.Infrastructure.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RefreshTokens_AppUserId",
+                name: "IX_RefreshTokens_ApplicationUserId",
                 table: "RefreshTokens",
-                column: "AppUserId");
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ShoppingCarts_ApplicationUserId",

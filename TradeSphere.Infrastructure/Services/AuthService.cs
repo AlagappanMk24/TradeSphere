@@ -52,7 +52,7 @@ namespace TradeSphere.Infrastructure.Services
                 Token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64)),
                 ExpireOn = DateTime.UtcNow.AddDays(days),
                 CreatedOn = DateTime.UtcNow,
-                AppUserId = userId,
+                ApplicationUserId = userId,
             };
         }
         public async Task<(string AccessToken, RefreshToken RefreshToken)> RefreshTokenAsync(string token)
@@ -66,7 +66,7 @@ namespace TradeSphere.Infrastructure.Services
 
             await _refreshTokenRepository.RevokeAsync(refreshToken);
 
-            var user = refreshToken.AppUser;
+            var user = refreshToken.ApplicationUser;
             var newAccessToken = await GenerateJwtToken(user);
             var newRefreshToken = GenerateRefreshToken(user.Id, refreshToken.RememberMe);
             await _refreshTokenRepository.AddAsync(newRefreshToken);

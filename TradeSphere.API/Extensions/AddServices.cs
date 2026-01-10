@@ -1,4 +1,6 @@
-﻿namespace TradeSphere.Api.Extensions
+﻿using TradeSphere.Infrastructure.Repositories.OrderRepository;
+
+namespace TradeSphere.Api.Extensions
 {
     public static class AddServices
     {
@@ -27,6 +29,7 @@
             service.AddScoped<ICategoryUseCase, CategoryUseCase>();
             service.AddScoped<IProductUseCase, ProductUseCase>();
             service.AddScoped<IShoppingCartUseCase, ShoppingCartUseCase>();
+            service.AddScoped<IOrderUseCase, OrderUseCase>();
             service.AddScoped<IAuthService, AuthService>();
             service.AddScoped<IAuthRepository, AuthRepository>();
             service.AddScoped<IAccountRepository, AccountRepository>();
@@ -34,6 +37,7 @@
             service.AddScoped<ICategoryRepository, CategoryRepository>();
             service.AddScoped<IProductRepository, ProductRepository>();
             service.AddScoped<IShoppingCartRepository, ShoppingCartRepository>();
+            service.AddScoped<IOrderRepository, OrderRepository>();
             service.AddScoped<IEmailService, EmailService>();
             service.AddScoped<IUnitOfWork, UnitOfWork>();
             service.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();

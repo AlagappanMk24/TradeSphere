@@ -18,7 +18,7 @@ namespace TradeSphere.Infrastructure.Specifications
         }
         void AddInculdes()
         {
-            Includes.Add(r => r.AppUser);
+            Includes.Add(r => r.ApplicationUser);
 
         }
     }
