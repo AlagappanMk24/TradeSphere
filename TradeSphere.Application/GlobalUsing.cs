@@ -18,3 +18,5 @@ global using TradeSphere.Application.DTOs.OrderDto.CreateOrderDto;
 global using TradeSphere.Application.DTOs.OrderItemDto;
 global using TradeSphere.Domain.Enums;
 global using TradeSphere.Application.Contracts.DTOs.PaymentDto;
+global using TradeSphere.Application.Contracts.DTOs.FeedBackDto;
+global using TradeSphere.Application.Contracts.DTOs.ShoppingCartDto;
