@@ -322,87 +322,91 @@ dotnet user-secrets set "EmailSettings:Password" "your-email-app-password"
 
 ## 📡 API Endpoints
 
-### 🔐 Authentication (`/api/Auth`)
+### 🔐 Authentication (`/api/v1/auth`)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/api/Auth/login` | User login |
-| `POST` | `/api/Auth/register` | User registration |
-| `GET` | `/api/Auth/confirmEmail` | Confirm email address |
-| `GET` | `/api/Auth/confirmChangeEmail` | Confirm email change |
-| `POST` | `/api/Auth/forgotPassword` | Request password reset |
-| `POST` | `/api/Auth/resetPassword` | Reset password |
-| `POST` | `/api/Auth/refreshToken` | Refresh access token |
-| `POST` | `/api/Auth/logout` | User logout |
+| `POST` | `/api/v1/auth/login` | User login |
+| `POST` | `/api/v1/auth/register` | User registration |
+| `GET` | `/api/v1/auth/confirm-email` | Confirm email address |
+| `GET` | `/api/v1/auth/confirm-email-change` | Confirm email change |
+| `POST` | `/api/v1/auth/forgot-password` | Request password reset |
+| `POST` | `/api/v1/auth/reset-password` | Reset password |
+| `POST` | `/api/v1/auth/refresh-token` | Refresh access token |
+| `POST` | `/api/v1/auth/logout` | User logout |
 
-### 👤 Account (`/api/Account`)
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/Account` | Get current user info |
-| `PUT` | `/api/Account` | Update account details |
-
-### 📦 Products (`/api/Product`)
+### 👤 Account (`/api/account`)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/api/Product` | Get all products |
-| `GET` | `/api/Product/{id}` | Get product by ID |
-| `GET` | `/api/Product/GetByName{name}` | Get product by name |
-| `POST` | `/api/Product` | Create new product |
-| `PUT` | `/api/Product/{id}` | Update product |
-| `DELETE` | `/api/Product/{id}` | Delete product |
+| `GET` | `/api/account/profile` | Get current user info |
+| `PUT` | `/api/account/profile` | Update account details |
+| `POST` | `/api/account/password/change` | Change Password |
+| `POST` | `/api/account/email/change-request` | Email Request Change |
 
-### 🗂️ Categories (`/api/Category`)
+### 📦 Products (`/api/products`)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/api/Category/GetAllCategory` | Get all categories |
-| `GET` | `/api/Category/GetById/{id}` | Get category by ID |
-| `GET` | `/api/Category/GetByName/{name}` | Get category by name |
-| `POST` | `/api/Category` | Create category |
-| `PUT` | `/api/Category/{id}` | Update category |
-| `DELETE` | `/api/Category/{id}` | Delete category |
+| `GET` | `/api/products` | Get all products |
+| `GET` | `/api/products/{id}` | Get product by ID |
+| `GET` | `/api/products/search?name={name}` | Search product by name (Query Param) |
+| `POST` | `/api/products` | Create new product |
+| `PUT` | `/api/products/{id}` | Update product details |
+| `DELETE` | `/api/products/{id}` | Delete product |
+
+### 🗂️ Categories (`/api/categories`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/categories` | Get all categories |
+| `GET` | `/api/categories/{id}` | Get category by ID |
+| `GET` | `/api/categories/name/{name}` | Get category by name |
+| `POST` | `/api/categories` | Create category |
+| `PUT` | `/api/categories/{id}` | Update category |
+| `DELETE` | `/api/categories/{id}` | Delete category |
 
 ### 🛒 Shopping Cart (`/api/ShoppingCart`)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/api/ShoppingCart` | Get user's cart |
-| `POST` | `/api/ShoppingCart` | Add item to cart |
-| `PUT` | `/api/ShoppingCart/{productId}` | Update item quantity |
-| `DELETE` | `/api/ShoppingCart` | Remove item from cart |
-| `POST` | `/api/ShoppingCart/clear` | Clear entire cart |
+| `GET` | `/api/carts` | Get authorized user's cart |
+| `POST` | `/api/carts/items` | Add item to cart |
+| `PUT` | `/api/carts/items/{productId}` | Update item quantity |
+| `DELETE` | `/api/carts/items/{productId}` | Remove specific item/quantity |
+| `DELETE` | `/api/carts` | Clear entire cart |
 
 ### 📋 Orders (`/api/Order`)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/api/Order` | Get all orders |
-| `GET` | `/api/Order/{id}` | Get order by ID |
-| `GET` | `/api/Order/Users/{userId}` | Get orders by user |
-| `POST` | `/api/Order/Checkout` | Create order (checkout) |
-| `POST` | `/api/Order/cancel/{id}` | Cancel order |
-| `PUT` | `/api/Order/status` | Update order status |
-| `GET` | `/api/Order/status/{id}` | Get order status |
-| `DELETE` | `/api/Order/{id}` | Delete order |
+| `GET` | `/api/orders` | Get all orders |
+| `GET` | `/api/orders/{id}` | Get order by ID |
+| `GET` | `/api/orders/users/{userId}` | Get orders for a specific user |
+| `POST` | `/api/orders` | Create order (checkout) |
+| `POST` | `/api/orders/{id}/cancel` | Cancel an order |
+| `PUT` | `/api/orders/{id}/status` | Update order status |
+| `GET` | `/api/orders/{id}/status` | Get current order status |
+| `DELETE` | `/api/orders/{id}` | Delete an order |
 
-### ⭐ Feedback (`/api/FeedBack`)
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/FeedBack` | Get all feedback |
-| `POST` | `/api/FeedBack` | Submit feedback |
-| `PUT` | `/api/FeedBack/{id}` | Update feedback |
-| `DELETE` | `/api/FeedBack/{id}` | Delete feedback |
-
-### 🔑 Roles (`/api/Role`)
+### ⭐ Feedback (`/api/feedback`)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET` | `/api/Role` | Get all roles |
-| `POST` | `/api/Role` | Create new role |
-| `POST` | `/api/Role/assign` | Assign role to user |
+| `GET` | `/api/feedback/product/{id}` | Get feedback for a specific product |
+| `POST` | `/api/feedback` | Submit new feedback |
+| `PUT` | `/api/feedback/{id}` | Update existing feedback |
+
+### 🔑 Roles (`/api/roles`)
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/roles` | Get all roles |
+| `GET` | `/api/roles/{id}` | Get role by id |
+| `GET` | `/api/roles/users/{userid}` | Get user role |
+| `POST` | `/api/roles` | Create new role |
+| `PUT` | `/api/roles/{id}` | Update existing user role|
+| `POST` | `/api/roles/assignments` | Assign role to user |
 
 ---
 
@@ -411,7 +415,7 @@ dotnet user-secrets set "EmailSettings:Password" "your-email-app-password"
 ### Register a New User
 
 ```bash
-curl -X POST https://localhost:7013/api/Auth/register \
+curl -X POST https://localhost:7013/api/v1/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -424,7 +428,7 @@ curl -X POST https://localhost:7013/api/Auth/register \
 ### Login
 
 ```bash
-curl -X POST https://localhost:7013/api/Auth/login \
+curl -X POST https://localhost:7013/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "user@example.com",
@@ -435,14 +439,14 @@ curl -X POST https://localhost:7013/api/Auth/login \
 ### Get All Products
 
 ```bash
-curl -X GET https://localhost:7013/api/Product \
+curl -X GET https://localhost:7013/api/products \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
 ### Add to Cart
 
 ```bash
-curl -X POST https://localhost:7013/api/ShoppingCart \
+curl -X POST https://localhost:7013/api/carts/items \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -d '{
@@ -454,7 +458,7 @@ curl -X POST https://localhost:7013/api/ShoppingCart \
 ### Checkout
 
 ```bash
-curl -X POST https://localhost:7013/api/Order/Checkout \
+curl -X POST https://localhost:7013/api/orders \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -d '{
